@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class commandBase (ABC): 
+class commandBase (ABC):  
     parameters =None
     comicID =None
     
@@ -19,8 +19,3 @@ class commandBase (ABC):
     @abstractmethod    
     def allInOne(self):
         pass
-    
-
-    
-
-    

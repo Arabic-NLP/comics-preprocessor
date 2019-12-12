@@ -1,8 +1,7 @@
 
 class unifyLanguage:
-    def __init__(self, ph):
-        self.phrase=ph
-    
+    def __init__(self):
+        return
     
     def numUnifier(self):
         return phrase

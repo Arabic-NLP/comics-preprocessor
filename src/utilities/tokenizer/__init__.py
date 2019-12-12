@@ -1,7 +1,7 @@
 class tokenizer:
-    def __init__(self, ph):
-        self.phrase=ph
-        
+    def __init__(self):
+        return
+    
     def numloader(self,file):
         return
     

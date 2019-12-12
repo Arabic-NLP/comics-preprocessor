@@ -1,7 +1,7 @@
 class wordDetector:
-    def __init__(self, li):
-        self.list=li
-        
+    def __init__(self):
+        return
+    
     def stoppingWordLoader(self,file):
         return 
         
