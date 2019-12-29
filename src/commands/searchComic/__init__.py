@@ -43,23 +43,38 @@ for moduleName in modulesNames:
 
 
 class searchComic(base):
-    UNI= modules['unifyLanguage']() 
+    #UNI= modules['unifyLanguage']() 
     token= modules['tokenizer']()
     detect= modules['wordDetector']()
     
     def execut(self):
         x = self.parameters        
-        UNI.phrase=x
-        x= UNI.allinone()
+        #UNI.phrase=x
+        #x= UNI.allinone()
         x= token.splt(x)
         x= stoppingWordsRemover(x)
-        x= token.formater(x)
+        x= token.formatter(x)
         x= detect.removeIfNotExist(x)
         return x
     
     def allInOne():
-        return
+        return 0
     def clean():
-        return
+        return 0
     def prepare():
-        return    
+        return 0   
+    
+    
+    
+
+x= searchComic()
+x.parameters=input("enter: ")
+n= x.execut()
+
+f=open ("result.txt" , "w", encoding=('utf-8') )
+
+for i in range(0,len(n)):
+    f.write(n[i]+"\r\n")
+f.close()
+
+
