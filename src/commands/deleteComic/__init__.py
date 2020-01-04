@@ -6,14 +6,15 @@ from importlib import import_module
 
 # prepare current path and utilities path
 currentPath=Path(__file__).parent 
-CommandPath=currentPath
-utilitiesPath=join(currentPath,"..","..","utilities")
+CommandPath=str(currentPath)
+print(type(CommandPath))
+utilitiesPath=join(str(currentPath),"..","..","utilities")
 
 # add utilities as sys path so that python could find the modules inside it 
 sys.path.append(utilitiesPath)
 
 # import base class commandBase, but call it "base"
-basePath=join(currentPath,"..")
+basePath=join(str(currentPath),"..")
 sys.path.append(basePath)
 #print(sys.path)
 from commandBase import commandBase as base

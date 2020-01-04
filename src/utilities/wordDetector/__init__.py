@@ -1,4 +1,8 @@
+from os.path import isdir, join
+from pathlib import Path
 
+currentPath=Path(__file__).parent 
+filePath=str(join(str(currentPath),"..","..","..","resources","doc"))
 class wordDetector:
     phrase=""
     def __init__(self):
@@ -7,7 +11,7 @@ class wordDetector:
 
         
     def stoppingWordLoader(self):
-        f=open("stoppingWords.txt", "r", encoding=('utf-8'))
+        f=open(join(filePath,"stoppingWords.txt"), "r", encoding=('utf-8'))
         content= f.read().splitlines()
         stopping=[]
         for i in content:
@@ -19,6 +23,7 @@ class wordDetector:
         for i in range(0, len(self.lst)-1):
             if self.lst[i] in self.stoppingWordLoader():
                 self.lst.remove(self.lst[i])
+                print("removed %s").format(lst[i])
                 i=i-1
         return self.lst
     
@@ -43,7 +48,7 @@ class wordDetector:
     def removeIfNotExist(self):
         #x=DB()
         new=[]
-        f=open("exist.txt", "r", encoding=('utf-8') )
+        f=open(join(filePath,"exist.txt"), "r", encoding=('utf-8') )
         exist= f.read().splitlines()
         for i in self.lst:
             if i in exist:
@@ -65,18 +70,18 @@ class wordDetector:
 
 
 
-
+'''
 
 x= wordDetector()
 
-x.phrase= input ("input: ")
+x.phrase= input ("input word to detector: ")
 n=x.phrase.split()
 x.lst=n
-'''
+
 f=open ("result.txt" , "w", encoding=('utf-8') )
 for i in range(0,len(x.lst)):
     f.write(x.lst[i]+"\r\n")
-'''
+
 
 
 x.stoppingWordsRemover()
@@ -88,3 +93,4 @@ for i in range(0,len(x.lst)):
 f.close()
 
 
+''' 

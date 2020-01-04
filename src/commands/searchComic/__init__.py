@@ -7,13 +7,14 @@ from importlib import import_module
 # prepare current path and utilities path
 currentPath=Path(__file__).parent 
 CommandPath=currentPath
-utilitiesPath=join(currentPath,"..","..","utilities")
+print(currentPath)
+utilitiesPath=join(str(currentPath),"..","..","utilities")
 
 # add utilities as sys path so that python could find the modules inside it 
 sys.path.append(utilitiesPath)
 
 # import base class commandBase, but call it "base"
-basePath=join(currentPath,"..")
+basePath=join(str(currentPath),"..")
 sys.path.append(basePath)
 #print(sys.path)
 from commandBase import commandBase as base
@@ -24,8 +25,9 @@ modulesNames = [f for f in listdir(utilitiesPath) if (isdir(join(utilitiesPath, 
 print("Imported Modules are: ",modulesNames)
 
 def dynamicImport(name):
-    components = name.split('.')    
-    mod = __import__(components[0])
+    components = name.split('.')
+    print(components[0])   
+    mod = __import__(components[0].strip())
     for comp in components[1:]:
         mod = getattr(mod, comp)
     return mod
@@ -43,22 +45,39 @@ for moduleName in modulesNames:
 
 
 class searchComic(base):
-    #UNI= modules['unifyLanguage']() 
-    token= modules['tokenizer']()
-    detect= modules['wordDetector']()
+    
+    def __init__(self):
+        self.UNI= modules['unifyLanguage']() 
+        self.token= modules['tokenizer']()
+        self.detect= modules['wordDetector']()
     
     def execut(self):
         x = self.parameters        
         #UNI.phrase=x
         #x= UNI.allinone()
-        x= token.splt(x)
-        x= stoppingWordsRemover(x)
-        x= token.formatter(x)
-        x= detect.removeIfNotExist(x)
+        self.token.phrase=x
+        print(x)
+        x= self.token.splitter()
+        print(x)
+        self.detect.lst=x
+        print(x)
+        x= self.detect.stoppingWordsRemover()
+        print(x)
+        self.token.phrase=x
+        print(x)
+        x= self.token.formatter()
+        print(x)
+        self.detect.phrase=x
+        print(x)
+        x= self.detect.removeIfNotExist()
+        print(x)
         return x
     
     def allInOne():
-        return 0
+        self.prepare()
+        res= self.execut()
+        self.clean()
+        return res
     def clean():
         return 0
     def prepare():
@@ -66,11 +85,11 @@ class searchComic(base):
     
     
     
-
+'''
 x= searchComic()
-x.parameters=input("enter: ")
+x.parameters=input("enter phrase to ssearch: ")
 n= x.execut()
-
+print("N",n)
 f=open ("result.txt" , "w", encoding=('utf-8') )
 
 for i in range(0,len(n)):
@@ -78,3 +97,4 @@ for i in range(0,len(n)):
 f.close()
 
 
+'''

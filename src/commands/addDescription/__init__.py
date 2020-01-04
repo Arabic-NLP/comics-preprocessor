@@ -5,7 +5,7 @@ from pathlib import Path
 from importlib import import_module
 
 # prepare current path and utilities path
-currentPath=Path(__file__).parent 
+currentPath=str(Path(__file__).parent) 
 CommandPath=currentPath
 utilitiesPath=join(currentPath,"..","..","utilities")
 
